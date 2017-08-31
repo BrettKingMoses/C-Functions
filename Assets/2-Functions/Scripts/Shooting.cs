@@ -15,8 +15,6 @@ public class Shooting : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         shootTimer += Time.deltaTime;
@@ -30,7 +28,6 @@ public class Shooting : MonoBehaviour
             shootTimer = 0;
         }
     }
-
     void Shoot()
     {
         // Instantiate GameObject here

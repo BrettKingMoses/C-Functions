@@ -25,6 +25,11 @@ namespace Breakout
             ContactPoint2D contact = other.contacts[0];
             Vector3 reflect = Vector3.Reflect(velocity, contact.normal);
             velocity = reflect.normalized * velocity.magnitude;
+            if (other.gameObject.tag == "Block")
+            {
+                Debug.Log("Block Destroyed, + 1 point");
+                Destroy(other.gameObject);
+            }
         }
         // Update is called once per frame
         void Update()
