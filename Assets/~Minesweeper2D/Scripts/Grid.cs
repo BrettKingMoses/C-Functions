@@ -11,6 +11,10 @@ namespace Minesweeper2D
         public float spacing = .155f;
         private Tile[,] tiles;
         //spawn tile function
+        void start()
+        {
+            GenerateTiles();
+        }
         Tile SpawnTile(Vector3 pos)
         {
             //clone tile prefab
@@ -48,10 +52,6 @@ namespace Minesweeper2D
 
                 }
             }
-        }
-        void start()
-        {
-            GenerateTiles();
         }
         //count adjacent mines
         public int GetAdjacentMineCountAt(Tile t)
