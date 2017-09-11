@@ -60,11 +60,25 @@ namespace Minesweeper2D
             //loop through all elements and have each axis go between -1 to 1
             for (int x = -1; x <= 1; x++)
             {
-                //calculate desired coordinates from ones attained
-                int desiredX = t.x + x;
-                //IF desiredx is within range of array length
-                //IF the element at index is a mine
-                //increment cont by 1
+                for (int Y = -1; Y <= 1; Y++)
+                {
+
+
+                    //calculate desired coordinates from ones attained
+                    int desiredX = t.x + x;
+                    int desiredY = t.y + Y;
+                    //IF desiredx is within range of array length
+                    if(desiredX >= 0 && desiredY >= 0 && desiredX < width && desiredY <height)
+                    {
+                        Tile tile = tiles[desiredX, desiredY];
+                        if (tile.isMine)
+                        {
+                            count++;
+                        }
+                    }
+                    //IF the element at index is a mine
+                    //increment cont by 1
+                }
             }
             return count;
         }
