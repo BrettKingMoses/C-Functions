@@ -10,10 +10,24 @@ namespace Minesweeper2D
         public int height;
         public float spacing = .155f;
         private Tile[,] tiles;
+        public float offset = 0.1f;
         //spawn tile function
-        void start()
+        void Start()
         {
             GenerateTiles();
+        }
+        void FixedUpdate()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+                if (hit.collider != null)
+                {
+
+                }
+            }
         }
         Tile SpawnTile(Vector3 pos)
         {
@@ -26,6 +40,7 @@ namespace Minesweeper2D
         //spawn tiles in grid like pattern
         void GenerateTiles()
         {
+            
             //create new 2D array of size width x height
             tiles = new Tile[width, height];
             //loop through entire tile list
@@ -49,7 +64,6 @@ namespace Minesweeper2D
                     tile.y = y;
                     //store tile in array
                     tiles[x, y] = tile;
-
                 }
             }
         }
