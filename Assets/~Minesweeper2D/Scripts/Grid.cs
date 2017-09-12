@@ -5,12 +5,13 @@ namespace Minesweeper2D
 {
     public class Grid : MonoBehaviour
     {
+        public enum { LOSS = 0, WIN = 1 };
         public GameObject tilePrefab;
         public int width = 10;
         public int height;
         public float spacing = .155f;
         private Tile[,] tiles;
-        public float offset = 0.1f;
+        public Vector2 offset = new Vector2(0.1f, 0.1f);
         //spawn tile function
         void Start()
         {
@@ -40,7 +41,7 @@ namespace Minesweeper2D
         //spawn tiles in grid like pattern
         void GenerateTiles()
         {
-            
+
             //create new 2D array of size width x height
             tiles = new Tile[width, height];
             //loop through entire tile list
@@ -52,7 +53,7 @@ namespace Minesweeper2D
                     Vector2 halfSize = new Vector2(width / 2, height / 2);
                     //pivot tiles around grid
                     Vector2 pos = new Vector2(x - halfSize.x, y - halfSize.y);
-
+                    pos += offset;
                     //apply searching
                     pos *= spacing;
                     //spawn tile
@@ -82,7 +83,7 @@ namespace Minesweeper2D
                     int desiredX = t.x + x;
                     int desiredY = t.y + Y;
                     //IF desiredx is within range of array length
-                    if(desiredX >= 0 && desiredY >= 0 && desiredX < width && desiredY <height)
+                    if (desiredX >= 0 && desiredY >= 0 && desiredX < width && desiredY < height)
                     {
                         Tile tile = tiles[desiredX, desiredY];
                         if (tile.isMine)
@@ -95,6 +96,59 @@ namespace Minesweeper2D
                 }
             }
             return count;
+        }
+        public void FFuncover(int x, int y, bool[,] visited)
+        {
+            if (x >= 0 && y >= 0 && y < width && x < height)
+            {
+                //let tile = tiles[x,y]
+                //let adjacentMines = GetAdMineC(tile)
+                //call tile.reveal(adjacentmines)
+
+            //if adjacentmines > 0
+            //returm
+
+            //set visited [x,y] = true
+
+            //call FFuncover (x - 1, y, visited)
+            //call FFuncover (x +1, y, visited) 
+            //call FFuncover (x, y - 1 visited)
+            //call FFuncover (x, y + 1 visited)
+            }
+        }
+        public void UncoverMines()
+        {
+            // for x = 0 to x < width
+            // for y = 0 to y < heigh
+            // let currenttile = Tiles [x,y]
+            // if currenttile ismine
+            // let adjacentmines = getadjacentat
+            // call currenttile.reveal (adjacentMines, mineState)
+        }
+        public void SelectTile(Tile selectedTile)
+        {
+            // let adjacentmines = getadjacentminecountat(selectedtile)
+            //call selectedtile.reveal
+            //if selected is mine
+            // call uncovermines
+            //[extra] perform game over logic
+            //else if adjacent mines == 0
+            //let x = se;ectedtile.x
+            //let y = selectedTile.y
+            //call ffuncover (x,y,new bool[width,height])
+            //if nomoreempty
+            //call uncovermines
+            //[extra]perform win logic
+        }
+        bool NoMoreEmptyTiles()
+        {
+            int emptyTileCount = 0;
+            // for x = 0 to x < width
+            // for y = 0 to y < height
+            //let currenttiles = tiles[x,y]
+            //if !currenttile.isrevealed and !currenttile.ismine
+            //set emptytilecount = emptytilecount + 1
+            return emptyTileCount == 0;
         }
     }
 }

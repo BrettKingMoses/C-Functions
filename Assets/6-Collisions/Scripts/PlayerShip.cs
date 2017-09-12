@@ -26,7 +26,7 @@ namespace Collisions
         {
             float inputV = Input.GetAxis("Vertical");
             float currentSpeed = acceleration;
-            if (Input.GetKey(KeyCode.LeftShift)) ;
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 currentSpeed = gottaGoFast;
             }
