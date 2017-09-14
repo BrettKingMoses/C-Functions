@@ -15,7 +15,7 @@ namespace TowerDefense
             Enemy e = col.GetComponent<Enemy>();
             if (e != null)
             {
-
+                enemies.Add(e);
             }
         }
         void OnTriggerExit(Collider col)
@@ -23,20 +23,39 @@ namespace TowerDefense
             Enemy e = col.GetComponent<Enemy>();
             if (e != null)
             {
-
+                enemies.Remove(e);
             }
         }
         Enemy GetClosestEnemy()
         {
             Enemy closest = null;
+            float minDistance = float.MaxValue;
+            foreach (Enemy enemy in enemies)
+            {
+                float distance = Vector3.Distance(enemy.transform.position, cannon.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closest = enemy;
+                }
+            }
             return closest;
         }
         void Attack()
         {
-            GetClosestEnemy();
+            Enemy closest = GetClosestEnemy();
             if (closest != null)
-                {
-                Fire();
+            {
+                cannon.Fire(closest);
+            }
+        }
+        void Update()
+        {
+            attackTimer = attackTimer + Time.deltaTime;
+            if (attackTimer >= attackRate)
+            {
+                Attack();
+                attackTimer = 0;
             }
         }
     }
