@@ -5,7 +5,6 @@ namespace Minesweeper2D
 {
     public class Grid : MonoBehaviour
     {
-        public enum { LOSS = 0, WIN = 1 };
         public GameObject tilePrefab;
         public int width = 10;
         public int height;
