@@ -6,7 +6,7 @@ namespace AI
 {
     public class SteeringBehaviour : MonoBehaviour
     {
-        public float weight = 8f;
+        public float weighting = 8f;
         public Vector3 force;
         public AIAgent owner;
         protected virtual void Awake()

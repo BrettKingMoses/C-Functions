@@ -26,27 +26,37 @@ namespace AI
         void ComputeForces()
         {
             //set force = vec3.0
-            force = Vector3.0;
+            force = new Vector3(0, 0, 0);
             //for i := 0 < behaviours.Count
             for (int i = 0; i < behaviours.Count; ++i)
             {
                 //let behaviour = behaviours[i]
                 SteeringBehaviour behaviour = behaviours[i];
                 //if behaviour.isactiveandenabled == false
-                    if(Behaviour.isActiveAndEnabled == false)
+                    if(behaviour.isActiveAndEnabled == false)
                 {
                     //continue
                     continue;
                 }
-                    //set force = force + behaviour.GetForce() * behaviour.weighting
-                    //if force > maxVelocity
+                //set force = force + behaviour.GetForce() * behaviour.weighting
+                force = force + behaviour.GetForce() * behaviour.weighting;    
+            //if force > maxVelocity
+            if(force > maxVelocity)
+                {
+                    force = forces
+                }
                     //set force = force.normalised * maxvel
                     //break
             }
         }
         void ApplyVelocity()
         {
-
+            //set velocity = velocity + force *deltatime
+            //if velocity.magnitude > macvelocity
+            //set velocity = velocity.normalised
+            //if velocity.magnitude > 0
+            //set transform.position = tran.pos + vel *deltime
+            //set tran.rot = quat lookrot (vel)
         }
         void FixedUpdate()
         {
