@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using GGL;
 namespace AI
 {
     public class Seek : SteeringBehaviour
@@ -16,7 +17,18 @@ namespace AI
             {
                 return force;
             }
-            desiredForce = target position - transform position;
+            Vector3 desiredForce = target.position - transform.position;
+            if (desiredForce.magnitude > stoppingDistance)
+            {
+                desiredForce = desiredForce.normalized * weighting;
+                force = desiredForce - owner.velocity;
+            }
+            #region GizmosGL
+            GizmosGL.color = Color.red;
+            GizmosGL.AddLine(transform.position, transform.position + force, 0.1f);
+            GizmosGL.color = Color.white;
+            GizmosGL.AddLine(transform.position, transform.position + desiredForce, 0.1f);
+            #endregion
             return force;
         }
     }
